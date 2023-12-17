@@ -15,11 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} 2xl:container mx-auto`}>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <Header />
+        <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );
