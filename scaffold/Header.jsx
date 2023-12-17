@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -21,6 +21,7 @@ import { Moon } from "react-feather";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("");
   const pathname = usePathname();
   // Had to use a hook to check for screen size since for some reason the tailwind breakpoint classes don't seem to work with this component
   // tailwind breakpoints: {
@@ -39,19 +40,20 @@ const Header = () => {
     { label: "Contact", route: "/contact" },
   ];
   const handleThemeChange = (value) => {
-    if (value) {
+    const savedTheme = localStorage.getItem("theme");
+    if (value || savedTheme == "light") {
       document.documentElement.className = "dark";
-    } else {
+      localStorage.setItem("theme", "dark");
+      setTheme("dark");
+    } else if (!value || savedTheme == "dark") {
       document.documentElement.className = "light";
+      localStorage.setItem("theme", "light");
+      setTheme("light");
     }
   };
-  (value) => {
-    if (value) {
-      document.documentElement.className = "dark";
-    } else {
-      document.documentElement.className = "light";
-    }
-  };
+  useEffect(() => {
+    handleThemeChange();
+  }, []);
   return (
     <>
       <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -84,7 +86,7 @@ const Header = () => {
           <NavbarItem className={`hidden ${isLargeScreen && "flex"}`}>
             <Switch
               color="success"
-              defaultSelected
+              isSelected={theme == "dark"}
               startContent={<Sun />}
               endContent={<Moon />}
               onValueChange={handleThemeChange}
@@ -115,7 +117,7 @@ const Header = () => {
           <NavbarMenuItem>
             <Switch
               color="success"
-              defaultSelected
+              isSelected={theme == "dark"}
               size="lg"
               startContent={<Sun />}
               endContent={<Moon />}

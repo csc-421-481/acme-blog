@@ -104,18 +104,6 @@ const Footer = () => {
                 <GitHub />
               </Link>
             </li>
-            <li>
-              <Link
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                color="foreground"
-                className="hover:text-primary"
-              >
-                <span className="sr-only">Dribbble</span>
-                <Dribbble />
-              </Link>
-            </li>
           </ul>
         </div>
       </footer>
