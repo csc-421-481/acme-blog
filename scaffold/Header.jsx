@@ -40,19 +40,23 @@ const Header = () => {
     { label: "Contact", route: "/contact" },
   ];
   const handleThemeChange = (value) => {
-    const savedTheme = localStorage.getItem("theme");
-    if (value || savedTheme == "light") {
+    if (value) {
       document.documentElement.className = "dark";
       localStorage.setItem("theme", "dark");
       setTheme("dark");
-    } else if (!value || savedTheme == "dark") {
+    } else {
       document.documentElement.className = "light";
       localStorage.setItem("theme", "light");
       setTheme("light");
     }
   };
   useEffect(() => {
-    handleThemeChange();
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme == "light") {
+      handleThemeChange(false); // set theme to light mode
+    } else {
+      handleThemeChange(true); // set theme to dark mode
+    }
   }, []);
   return (
     <>
