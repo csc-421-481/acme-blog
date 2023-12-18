@@ -1,15 +1,12 @@
-import { Link } from "@nextui-org/react";
+import { Link, Spacer } from "@nextui-org/react";
 import { GitHub } from "react-feather";
-import { Dribbble } from "react-feather";
-import { Twitter } from "react-feather";
-import { Instagram } from "react-feather";
-import { Facebook } from "react-feather";
 
 const Footer = () => {
   return (
     <>
-      <footer className="">
-        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col gap-8 mt-8 pt-8">
+      <footer className="xl:container w-5/6 lg:w-4/5 mx-auto">
+        <Spacer y={100} className="w-full" />
+        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col gap-8 pt-12">
           <div className="flex justify-center ">
             <h2 className="text-2xl font-bold">LOGO</h2>
           </div>
@@ -27,74 +24,14 @@ const Footer = () => {
             <li>
               <Link color="foreground" className="hover:text-primary" href="/">
                 {" "}
-                Careers{" "}
-              </Link>
-            </li>
-            <li>
-              <Link color="foreground" className="hover:text-primary" href="/">
-                {" "}
-                History{" "}
-              </Link>
-            </li>
-            <li>
-              <Link color="foreground" className="hover:text-primary" href="/">
-                {" "}
-                Services{" "}
-              </Link>
-            </li>
-            <li>
-              <Link color="foreground" className="hover:text-primary" href="/">
-                {" "}
                 Projects{" "}
-              </Link>
-            </li>
-            <li>
-              <Link color="foreground" className="hover:text-primary" href="/">
-                {" "}
-                Blog{" "}
               </Link>
             </li>
           </ul>
           <ul className="mt-12 flex justify-center gap-6 md:gap-8">
             <li>
               <Link
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                color="foreground"
-                className="hover:text-primary"
-              >
-                <span className="sr-only">Facebook</span>
-                <Facebook />
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                color="foreground"
-                className="hover:text-primary"
-              >
-                <span className="sr-only">Instagram</span>
-                <Instagram />
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                color="foreground"
-                className="hover:text-primary"
-              >
-                <span className="sr-only">Twitter</span>
-                <Twitter />
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/"
+                href="https://github.com/csc-421-481/acme-blog"
                 rel="noreferrer"
                 target="_blank"
                 color="foreground"
