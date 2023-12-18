@@ -21,7 +21,7 @@ import { Moon } from "react-feather";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const pathname = usePathname();
   // Had to use a hook to check for screen size since for some reason the tailwind breakpoint classes don't seem to work with this component
   // tailwind breakpoints: {
@@ -50,14 +50,6 @@ const Header = () => {
       setTheme("light");
     }
   };
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme == "light") {
-      handleThemeChange(false); // set theme to light mode
-    } else {
-      handleThemeChange(true); // set theme to dark mode
-    }
-  }, []);
   return (
     <>
       <Navbar onMenuOpenChange={setIsMenuOpen} className="w-full">
@@ -97,7 +89,7 @@ const Header = () => {
             />
           </NavbarItem>
           <NavbarItem>
-            <Button as={Link} color="primary" href="#" variant="flat">
+            <Button as={Link} color="primary" href="/login" variant="flat">
               Login
             </Button>
           </NavbarItem>
