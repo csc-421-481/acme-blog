@@ -22,9 +22,9 @@ const InputField = ({ type = "text", ...props }) => {
               onClick={toggleVisibility}
             >
               {isVisible ? (
-                <EyeOff size={12} className="pointer-events-none" />
+                <EyeOff size={18} className="pointer-events-none" />
               ) : (
-                <Eye size={12} className="pointer-events-none" />
+                <Eye size={18} className="pointer-events-none" />
               )}
             </button>
           }

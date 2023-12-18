@@ -1,5 +1,5 @@
 "use client";
-import InputField from "@/components/elements/form/InputFIeld";
+import InputField from "@/components/elements/form/InputField";
 import { Input, Link } from "@nextui-org/react";
 
 const LoginForm = () => {
