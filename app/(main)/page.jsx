@@ -20,7 +20,12 @@ export default function Home() {
               egestas tempus tellus etiam sed.
             </p>
             <div className="mt-4 md:mt-8">
-              <Button href="#" as={Link} color="primary" size="lg">
+              <Button
+                href="/create-account"
+                as={Link}
+                color="primary"
+                size="lg"
+              >
                 Get Started Today
               </Button>
             </div>

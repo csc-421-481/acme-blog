@@ -1,5 +1,5 @@
+import Header from "@/scaffold/Header";
 import Image from "next/image";
-import { Providers } from "../providers";
 
 const Layout = ({ children }) => {
   return (
@@ -15,7 +15,12 @@ const Layout = ({ children }) => {
               height={2000}
             />
           </div>
-          {children}
+          <div className="w-full lg:w-1/2 h-full">
+            <Header />
+            <div className="w-full px-4 py-12 sm:px-6 sm:py-16  lg:px-8 lg:py-24">
+              {children}
+            </div>
+          </div>
         </section>
       </main>
     </>

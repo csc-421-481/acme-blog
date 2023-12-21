@@ -50,6 +50,7 @@ const Header = () => {
       setTheme("light");
     }
   };
+  const authRoutes = ["/login", "/create-account"];
   useEffect(() => {
     setTheme(localStorage.getItem("theme"));
   }, []);
@@ -62,7 +63,9 @@ const Header = () => {
             className={isSmallScreen && "hidden"}
           />
           <NavbarBrand className="">
-            <p className="font-bold text-inherit text-red-500">LOGO</p>
+            <Link href="/" color="foreground">
+              <p className="font-bold text-inherit text-red-500">LOGO</p>
+            </Link>
           </NavbarBrand>
         </NavbarContent>
 
@@ -91,11 +94,13 @@ const Header = () => {
               onValueChange={handleThemeChange}
             />
           </NavbarItem>
-          <NavbarItem>
-            <Button as={Link} color="primary" href="/login" variant="flat">
-              Login
-            </Button>
-          </NavbarItem>
+          {!authRoutes.includes(pathname) && (
+            <NavbarItem>
+              <Button as={Link} color="primary" href="/login" variant="flat">
+                Login
+              </Button>
+            </NavbarItem>
+          )}
         </NavbarContent>
         <NavbarMenu>
           {menuItems.map((each, index) => (

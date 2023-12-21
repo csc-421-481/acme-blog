@@ -5,18 +5,14 @@ import { Input, Link } from "@nextui-org/react";
 const LoginForm = () => {
   return (
     <>
-      <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
-        <div className="relative">
-          <InputField
-            type="email"
-            label="Email Address"
-            placeholder="ikoojo@example.com"
-          />
-        </div>
+      <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-6">
+        <InputField
+          type="email"
+          label="Email Address"
+          placeholder="ikoojo@example.com"
+        />
 
-        <div>
-          <InputField type="password" label="Password" placeholder="******" />
-        </div>
+        <InputField type="password" label="Password" placeholder="******" />
         <div className="flex items-center justify-between">
           <p className="text-sm text-gray-500">
             No account?
