@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Card, CardHeader, CardBody, Link } from '@nextui-org/react'
 import { FileText } from 'react-feather'
 
-const TopAuthor = () => {
+const TeamMember = () => {
   return (
     <>
       <Card className="bg-gray p-5 group-hover:drop-shadow-1 group-hover:-translate-y-2 transition-all">
@@ -20,7 +20,7 @@ const TopAuthor = () => {
             <h3 className="font-semibold text-custom-xl text-dark mb-1">
               Joshua Dreu
             </h3>
-            <p>Content Writer</p>
+            <p className="text-sm">VUG/CSC/20/3957</p>
             <span className="flex items-center gap-2 text-sm mt-2.5 text-foreground-500">
               <FileText size={15} />6 Published posts
             </span>
@@ -30,4 +30,4 @@ const TopAuthor = () => {
     </>
   )
 }
-export default TopAuthor
+export default TeamMember
