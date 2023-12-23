@@ -31,7 +31,6 @@ const Header = () => {
   //     xl: "1280px",
   //   }
   const { queryMatches: isSmallScreen } = useMediaQuery(mediaBreakpoints.sm);
-  const { queryMatches: isLargeScreen } = useMediaQuery(mediaBreakpoints.lg);
 
   const menuItems = [
     { label: "Home", route: "/" },
@@ -85,7 +84,7 @@ const Header = () => {
           ))}
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem className={`hidden ${isLargeScreen && "flex"}`}>
+          <NavbarItem className={`hidden ${isSmallScreen && "flex"}`}>
             <Switch
               color="success"
               isSelected={theme == "dark"}
