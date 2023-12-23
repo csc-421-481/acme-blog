@@ -1,5 +1,4 @@
 import Footer from "@/scaffold/Footer";
-import { Providers } from "../providers";
 import Header from "@/scaffold/Header";
 
 export default function RootLayout({ children }) {
