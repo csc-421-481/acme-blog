@@ -6,11 +6,11 @@ const Layout = ({ children }) => {
     <>
       <main className="2xl:container mx-auto">
         <section className="relative flex flex-wrap lg:h-screen lg:items-center">
-          <div className="hidden md:block relative w-full sm:h-96 lg:h-full lg:w-1/2">
+          <div className="hidden md:block w-full sm:h-96  lg:w-1/2 relative">
             <Image
               alt="Welcome"
               src="/auth-banner.jpg"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full lg:w-1/2 w- object-cover lg:h-screen lg:fixed top-0 left-0"
               width={2000}
               height={2000}
             />

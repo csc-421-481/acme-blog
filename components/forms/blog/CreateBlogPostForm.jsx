@@ -6,16 +6,10 @@ import { Card, Button } from "@nextui-org/react";
 import TextEditor from "@/components/elements/form/TextEditor";
 import { Camera } from "react-feather";
 import { useState } from "react";
+import useHandleImageDraft from "@/features/hooks/useHandleImageDraft";
 
 const CreateBlogPostForm = () => {
-  const getImageUrl = (file, imageSetter) => {
-    const reader = new FileReader();
-
-    if (file[0]) {
-      reader?.readAsDataURL(file[0]);
-    }
-    reader.onloadend = () => imageSetter(reader.result);
-  };
+  const handleImageDraft = useHandleImageDraft();
   const [coverImageUrl, setCoverImageUrl] = useState("");
   return (
     <>
@@ -54,7 +48,7 @@ const CreateBlogPostForm = () => {
               id="input"
               accept=".svg, .png, .jpg"
               onChange={(e) => {
-                getImageUrl(e.target.files, setCoverImageUrl);
+                handleImageDraft(e.target.files, setCoverImageUrl);
               }}
             />
           </label>

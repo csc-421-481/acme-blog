@@ -1,3 +1,5 @@
+"use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
