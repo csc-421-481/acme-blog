@@ -3,11 +3,11 @@ import { createAccount } from "@/app/api/requests/users";
 import InputField from "@/components/elements/form/InputField";
 import useHandleImageDraft from "@/features/hooks/useHandleImageDraft";
 import { Avatar, Button, Link } from "@nextui-org/react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const CreateAccountForm = () => {
   const [profileImagePreviewUrl, setprofileImagePreviewUrl] = useState("");
@@ -18,6 +18,7 @@ const CreateAccountForm = () => {
     handleSubmit,
     getValues,
     setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -51,6 +52,16 @@ const CreateAccountForm = () => {
       }
     }
   };
+
+  // useEffect(() => {
+  //   const subscribe = watch((value) => {
+  //     console.log(value);
+  //   });
+  //   return () => {
+  //     subscribe.unsubscribe();
+  //   };
+  // }, []);
+
   return (
     <>
       <form
@@ -80,9 +91,18 @@ const CreateAccountForm = () => {
             isRequired
             label="First Name"
             placeholder="Joshua"
-            {...register("firstName", { required: "First name is required" })}
+            {...register("firstName", {
+              required: "First name is required",
+            })}
             isInvalid={!!errors.firstName}
             errorMessage={errors.firstName?.message}
+            value={watch("firstName")}
+            onValueChange={(value) => {
+              setValue(
+                "firstName",
+                value.charAt(0).toUpperCase() + value.slice(1)
+              );
+            }}
           />
           <InputField
             type="text"
@@ -92,6 +112,13 @@ const CreateAccountForm = () => {
             {...register("lastName", { required: "Last name is required" })}
             isInvalid={!!errors.lastName}
             errorMessage={errors.lastName?.message}
+            value={watch("lastName")}
+            onValueChange={(value) => {
+              setValue(
+                "lastName",
+                value.charAt(0).toUpperCase() + value.slice(1)
+              );
+            }}
           />
           <InputField
             type="email"
@@ -102,6 +129,10 @@ const CreateAccountForm = () => {
             {...register("email", { required: "Email address is required" })}
             isInvalid={!!errors.email}
             errorMessage={errors.email?.message}
+            value={watch("email")}
+            onValueChange={(value) => {
+              setValue("email", value.toLowerCase());
+            }}
           />
           <InputField
             type="text"
@@ -120,6 +151,13 @@ const CreateAccountForm = () => {
             })}
             isInvalid={!!errors.matricNumber}
             errorMessage={errors.matricNumber?.message}
+            value={watch("matricNumber")}
+            onValueChange={(value) => {
+              setValue(
+                "matricNumber",
+                value.charAt(0).toUpperCase() + value.slice(1)
+              );
+            }}
           />
 
           <InputField

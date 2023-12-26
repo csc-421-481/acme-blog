@@ -56,7 +56,9 @@ const LoginForm = () => {
           placeholder="ikoojo@example.com"
           {...register("email", { required: "Email Address is required" })}
           isInvalid={!!errors.email}
+          value={Watch("email")}
           errorMessage={!!errors.email?.message}
+          onValueChange={(value) => setValue("email", value.toLowerCase())}
         />
 
         <InputField

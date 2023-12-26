@@ -19,7 +19,6 @@ const EditProfileForm = ({ handleClose }) => {
   const { userData, userError, mutateUser } = useGetUser(Cookies.get("userId"));
 
   const defaultValues = {
-    // profileImage: userData?.profileImage,
     firstName: userData?.firstName,
     lastName: userData?.lastName,
     bio: userData?.bio,
@@ -51,7 +50,7 @@ const EditProfileForm = ({ handleClose }) => {
         ...desiredData,
       });
       console.log(data);
-      toast.success("Profile update successfully");
+      toast.success("Profile updated successfully");
       handleClose();
       mutateUser();
     } catch (error) {
@@ -83,10 +82,18 @@ const EditProfileForm = ({ handleClose }) => {
             isRequired
             label="First Name"
             placeholder="Joshua"
-            defaultValue={userData?.firstName}
-            {...register("firstName", { required: "First name is required" })}
+            {...register("firstName", {
+              required: "First name is required",
+            })}
             isInvalid={!!errors.firstName}
             errorMessage={errors.firstName?.message}
+            value={watch("firstName")}
+            onValueChange={(value) => {
+              setValue(
+                "firstName",
+                value.charAt(0).toUpperCase() + value.slice(1)
+              );
+            }}
           />
           <InputField
             type="text"
@@ -96,24 +103,33 @@ const EditProfileForm = ({ handleClose }) => {
             {...register("lastName", { required: "Last name is required" })}
             isInvalid={!!errors.lastName}
             errorMessage={errors.lastName?.message}
-            defaultValue={userData?.lastName}
+            value={watch("lastName")}
+            onValueChange={(value) => {
+              setValue(
+                "lastName",
+                value.charAt(0).toUpperCase() + value.slice(1)
+              );
+            }}
           />
           <InputField
             type="email"
             label="Email Address"
-            disabled
             isRequired
             placeholder="joshuaajorgbor@example.com"
             className="col-span-2"
-            value={userData?.email}
-            description="Your email address can not be modified"
+            {...register("email", { required: "Email address is required" })}
+            isInvalid={!!errors.email}
+            errorMessage={errors.email?.message}
+            value={watch("email")}
+            onValueChange={(value) => {
+              setValue("email", value.toLowerCase());
+            }}
           />
           <InputField
             type="text"
             label="Matric Number"
             isRequired
             placeholder="VUG/CSC/20/4000"
-            defaultValue={userData?.matricNumber}
             className="col-span-2 uppercase"
             {...register("matricNumber", {
               onChange: (e) => {
@@ -126,6 +142,13 @@ const EditProfileForm = ({ handleClose }) => {
             })}
             isInvalid={!!errors.matricNumber}
             errorMessage={errors.matricNumber?.message}
+            value={watch("matricNumber")}
+            onValueChange={(value) => {
+              setValue(
+                "matricNumber",
+                value.charAt(0).toUpperCase() + value.slice(1)
+              );
+            }}
           />
 
           <InputField
@@ -172,15 +195,11 @@ export const EditProfileImage = ({ handleClose }) => {
   const handleImageDraft = useHandleImageDraft();
 
   const submitData = async (formData) => {
-    console.log(formData);
-    // return;
-
     try {
       const { data } = await updateProfileImage(userData.id, {
         profileImage: formData.profileImage[0],
       });
-      console.log(data);
-      toast.success("Profile Image update successfully");
+      toast.success("Profile Image updated successfully");
       handleClose();
       mutateUser();
     } catch (error) {
