@@ -31,7 +31,7 @@ const Footer = () => {
           <ul className="mt-12 flex justify-center gap-6 md:gap-8">
             <li>
               <Link
-                href="https://github.com/csc-421-481/acme-blog"
+                href="https://github.com/csc-421-481/"
                 rel="noreferrer"
                 target="_blank"
                 color="foreground"

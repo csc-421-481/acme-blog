@@ -6,9 +6,12 @@ import { Avatar, Button, Link } from "@nextui-org/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const CreateAccountForm = () => {
   const [profileImagePreviewUrl, setprofileImagePreviewUrl] = useState("");
+  const [keepLoading, setKeepLoading] = useState(false);
   const handleImageDraft = useHandleImageDraft();
   const {
     register,
@@ -16,23 +19,35 @@ const CreateAccountForm = () => {
     getValues,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm({ defaultValues: { profileImage: [null] } });
+  } = useForm();
+
+  const router = useRouter();
 
   const submitData = async (formData) => {
     const { confirmPassword, profileImage, ...desiredData } = formData;
     try {
-      const res = await createAccount({
+      const { data } = await createAccount({
         ...desiredData,
         profileImage: profileImage[0],
       });
-      console.log(res);
+      console.log(data);
+      Cookies.set("token", data.token);
+      Cookies.set("userId", data.id);
+      setKeepLoading(true);
+      router.push("/profile");
     } catch (error) {
       console.error(error);
-      if (error.response.data) {
-        let keys = Object.keys(error.response.data);
-        let message = error.response.data[keys[0]];
-        console.log(Object.keys(error.response.data));
-        toast.error(message[0]);
+      const errorResponse = error?.response?.data;
+      if (errorResponse) {
+        let message = "";
+        for (const key in errorResponse) {
+          message += Array.isArray(errorResponse[key])
+            ? errorResponse[key][0] + "\n"
+            : errorResponse[key] + "\n";
+        }
+        toast.error(message);
+      } else {
+        toast.error("Something went wrong. Please try again later");
       }
     }
   };
@@ -46,21 +61,14 @@ const CreateAccountForm = () => {
         <div className="flex flex-col sm:grid grid-cols-2 gap-6">
           <div className="col-span-2 flex flex-col items-center gap-3">
             <label htmlFor="profileImage" className="cursor-pointer">
-              <InputField
+              <input
                 className="hidden"
                 id="profileImage"
                 type="file"
                 {...register("profileImage", {
-                  onChange: (e) => {
+                  onChange: (e) =>
                     handleImageDraft(e.target.files, setprofileImagePreviewUrl),
-                      console.log(e.target.files);
-                    e.target.files = e.target.files;
-                    // setValue("profileImage", e.target.files);
-                  },
                 })}
-                // onChange={(e) =>
-                //   handleImageDraft(e.target.files, setprofileImagePreviewUrl)
-                // }
                 accept=".png, .svg, .jpg"
               />
               <Avatar src={profileImagePreviewUrl} className="w-20 h-20" />
@@ -69,6 +77,7 @@ const CreateAccountForm = () => {
           </div>
           <InputField
             type="text"
+            isRequired
             label="First Name"
             placeholder="Joshua"
             {...register("firstName", { required: "First name is required" })}
@@ -78,6 +87,7 @@ const CreateAccountForm = () => {
           <InputField
             type="text"
             label="Last Name"
+            isRequired
             placeholder="Ajorgbor"
             {...register("lastName", { required: "Last name is required" })}
             isInvalid={!!errors.lastName}
@@ -86,6 +96,7 @@ const CreateAccountForm = () => {
           <InputField
             type="email"
             label="Email Address"
+            isRequired
             placeholder="joshuaajorgbor@example.com"
             className="col-span-2"
             {...register("email", { required: "Email address is required" })}
@@ -95,9 +106,13 @@ const CreateAccountForm = () => {
           <InputField
             type="text"
             label="Matric Number"
+            isRequired
             placeholder="VUG/CSC/20/4000"
-            className="col-span-2"
+            className="col-span-2 uppercase"
             {...register("matricNumber", {
+              onChange: (e) => {
+                setValue("matricNumber", e.target.value.toUpperCase());
+              },
               required: "Matric number is required",
               validate: (value) =>
                 value.length <= 20 ||
@@ -110,6 +125,7 @@ const CreateAccountForm = () => {
           <InputField
             type="password"
             label="Password"
+            isRequired
             placeholder="******"
             {...register("password", { required: "Password is required" })}
             isInvalid={!!errors.password}
@@ -118,6 +134,7 @@ const CreateAccountForm = () => {
           <InputField
             type="password"
             label="Confirm Password"
+            isRequired
             placeholder="******"
             {...register("confirmPassword", {
               required: "Please confirm password",
@@ -127,7 +144,15 @@ const CreateAccountForm = () => {
             isInvalid={!!errors.confirmPassword}
             errorMessage={errors.confirmPassword?.message}
           />
+          <InputField
+            type="textarea"
+            label="Bio"
+            {...register("bio")}
+            placeholder="Describe who you are"
+            className="col-span-2"
+          />
         </div>
+
         <div className="flex items-center justify-between">
           <p className="text-sm text-gray-500">
             Already have an account?
@@ -135,7 +160,11 @@ const CreateAccountForm = () => {
               Login
             </Link>
           </p>
-          <Button type="submit" isLoading={isSubmitting} color="primary">
+          <Button
+            type="submit"
+            isLoading={isSubmitting || keepLoading}
+            color="primary"
+          >
             Submit
           </Button>
         </div>

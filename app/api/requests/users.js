@@ -5,4 +5,20 @@ export const createAccount = (data) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
+export const updateProfile = (userId, data) =>
+  axiosInstance.put(
+    `/users/update/${userId}`,
+    data
+    // {
+    //   headers: { "Content-Type": "multipart/form-data" },
+    // }
+  );
+
+export const updateProfileImage = (userId, data) =>
+  axiosInstance.put(`/users/update-profile-image/${userId}`, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
 export const login = (data) => axiosInstance.post("/users/login/", data);
+
+export const getUser = (userId) => axiosInstance.get(`/users/${userId}`);

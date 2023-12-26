@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, forwardRef } from "react";
-import { Select, SelectItem, Input } from "@nextui-org/react";
+import { Select, SelectItem, Input, Textarea } from "@nextui-org/react";
 import { Eye, EyeOff } from "react-feather";
 
 const InputField = forwardRef(
@@ -17,8 +17,8 @@ const InputField = forwardRef(
             case "password":
               return (
                 <Input
-                  ref={ref}
                   {...props}
+                  ref={ref}
                   type={isVisible ? "text" : "password"}
                   endContent={
                     <button
@@ -35,9 +35,11 @@ const InputField = forwardRef(
                   }
                 />
               );
+            case "textarea":
+              return <Textarea {...props} ref={ref} />;
             case "select":
               return (
-                <Select ref={ref} {...props}>
+                <Select {...props} ref={ref}>
                   {options.map((each, index) => (
                     <SelectItem key={index} value={each.value}>
                       {each.label}
@@ -46,7 +48,7 @@ const InputField = forwardRef(
                 </Select>
               );
             default:
-              return <Input ref={ref} type={type} {...props} />;
+              return <Input type={type} {...props} ref={ref} />;
           }
         })()}
       </>

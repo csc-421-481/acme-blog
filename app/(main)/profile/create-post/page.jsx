@@ -1,4 +1,4 @@
-import CreateBlogPostForm from "@/components/forms/blog/CreateBlogPostForm";
+import CreateBlogPostForm from "@/components/forms/profile/CreateBlogPostForm";
 
 const Page = () => {
   return (

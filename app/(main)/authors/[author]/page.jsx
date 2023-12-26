@@ -1,6 +1,5 @@
 import BlogPost from "@/components/cards/BlogPost";
 import { Avatar } from "@nextui-org/react";
-import Image from "next/image";
 
 const page = () => {
   return (

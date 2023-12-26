@@ -1,28 +1,43 @@
 "use client";
-import { Fragment, useEffect, useState } from "react";
+import useGetUser from "@/features/hooks/swr-requests/useGetUser";
+import useMediaQuery from "@/features/hooks/useMediaQuery";
+import Cookies from "js-cookie";
+import { mediaBreakpoints } from "@/lib/constants";
 import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Link,
   Navbar,
   NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
   NavbarContent,
   NavbarItem,
-  Link,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
   Spacer,
   Switch,
-  Button,
 } from "@nextui-org/react";
-import useMediaQuery from "@/features/hooks/useMediaQuery";
-import { mediaBreakpoints } from "@/lib/constants";
-import { useRouter, usePathname } from "next/navigation";
-import { Sun } from "react-feather";
-import { Moon } from "react-feather";
+import { usePathname, useRouter } from "next/navigation";
+import { Fragment, useEffect, useState } from "react";
+import {
+  Moon,
+  Sun,
+  LogOut,
+  LogIn,
+  PlusCircle,
+  FilePlus,
+  User,
+} from "react-feather";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [theme, setTheme] = useState("dark");
   const pathname = usePathname();
+  const router = useRouter();
   // Had to use a hook to check for screen size since for some reason the tailwind breakpoint classes don't seem to work with this component
   // tailwind breakpoints: {
   //     sm: "640px",
@@ -31,7 +46,7 @@ const Header = () => {
   //     xl: "1280px",
   //   }
   const { queryMatches: isSmallScreen } = useMediaQuery(mediaBreakpoints.sm);
-
+  const { userData } = useGetUser(Cookies.get("userId"));
   const menuItems = [
     { label: "Home", route: "/" },
     { label: "Archive", route: "/archive" },
@@ -95,9 +110,62 @@ const Header = () => {
           </NavbarItem>
           {!authRoutes.includes(pathname) && (
             <NavbarItem>
-              <Button as={Link} color="primary" href="/login" variant="flat">
-                Login
-              </Button>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Avatar
+                    size="sm"
+                    src={userData?.profileImage}
+                    className="cursor-pointer"
+                  />
+                </DropdownTrigger>
+                {userData?.id ? (
+                  <DropdownMenu aria-label="user panel actions">
+                    <DropdownItem key="new" startContent={<User size={15} />}>
+                      Profile
+                    </DropdownItem>
+                    <DropdownItem
+                      key="copy"
+                      startContent={<FilePlus size={15} />}
+                    >
+                      Create Post
+                    </DropdownItem>
+                    <DropdownItem
+                      key="log out"
+                      className="text-danger"
+                      color="danger"
+                      startContent={<LogOut size={15} />}
+                      onClick={() => {
+                        Cookies.remove("userId");
+                        router.push("/");
+                      }}
+                    >
+                      Log Out
+                    </DropdownItem>
+                  </DropdownMenu>
+                ) : (
+                  <DropdownMenu aria-label="user panel actions">
+                    <DropdownItem
+                      key="copy"
+                      startContent={<LogIn size={15} />}
+                      as={Link}
+                      className="text-foreground"
+                      href="/login"
+                    >
+                      Login
+                    </DropdownItem>
+                    <DropdownItem
+                      key="log out"
+                      className="text-primary"
+                      color="primary"
+                      startContent={<PlusCircle size={15} />}
+                      as={Link}
+                      href="/create-account"
+                    >
+                      Create Account
+                    </DropdownItem>
+                  </DropdownMenu>
+                )}
+              </Dropdown>
             </NavbarItem>
           )}
         </NavbarContent>
