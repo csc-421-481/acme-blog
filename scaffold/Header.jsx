@@ -120,12 +120,21 @@ const Header = () => {
                 </DropdownTrigger>
                 {userData?.id ? (
                   <DropdownMenu aria-label="user panel actions">
-                    <DropdownItem key="new" startContent={<User size={15} />}>
+                    <DropdownItem
+                      key="new"
+                      startContent={<User size={15} />}
+                      className="text-foreground"
+                      as={Link}
+                      href="/profile"
+                    >
                       {userData?.firstName} {userData?.lastName}
                     </DropdownItem>
                     <DropdownItem
-                      key="copy"
+                      key="create post"
                       startContent={<FilePlus size={15} />}
+                      className="text-foreground"
+                      as={Link}
+                      href="/profile-create-post"
                     >
                       Create Post
                     </DropdownItem>
