@@ -13,6 +13,8 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm();
   const router = useRouter();
@@ -56,7 +58,7 @@ const LoginForm = () => {
           placeholder="ikoojo@example.com"
           {...register("email", { required: "Email Address is required" })}
           isInvalid={!!errors.email}
-          value={Watch("email")}
+          value={watch("email")}
           errorMessage={!!errors.email?.message}
           onValueChange={(value) => setValue("email", value.toLowerCase())}
         />

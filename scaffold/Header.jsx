@@ -146,7 +146,7 @@ const Header = () => {
                       onClick={() => {
                         Cookies.remove("userId");
                         Cookies.remove("token");
-                        router.push("/");
+                        window.location.href = "/"; // needed in order to refresh the page
                       }}
                     >
                       Log Out

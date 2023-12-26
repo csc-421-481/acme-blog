@@ -6,7 +6,7 @@ import {
 } from "@/app/api/requests/users";
 import InputField from "@/components/elements/form/InputField";
 import useHandleImageDraft from "@/features/hooks/useHandleImageDraft";
-import { Avatar, Button, Link } from "@nextui-org/react";
+import { Avatar, Button, Link, Switch } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -23,6 +23,7 @@ const EditProfileForm = ({ handleClose }) => {
     lastName: userData?.lastName,
     bio: userData?.bio,
     email: userData?.email,
+    isTeamMember: userData?.isTeamMember,
     matricNumber: userData?.matricNumber,
   };
   const {
@@ -38,6 +39,15 @@ const EditProfileForm = ({ handleClose }) => {
   useEffect(() => {
     reset({ ...defaultValues });
   }, [userData, reset]);
+
+  // useEffect(() => {
+  //   const subscribe = watch((value) => {
+  //     console.log(value);
+  //   });
+  //   return () => {
+  //     subscribe.unsubscribe();
+  //   };
+  // }, [watch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -159,6 +169,20 @@ const EditProfileForm = ({ handleClose }) => {
             placeholder="Describe who you are"
             className="col-span-2"
           />
+          <div className="col-span-2">
+            <Switch
+              {...register("isTeamMember")}
+              className="text-xs text-300"
+              defaultSelected={userData?.isTeamMember}
+              value={watch("isTeamMember")}
+              onValueChange={(value) => {
+                console.log(value);
+                setValue("isTeamMember", value);
+              }}
+            >
+              Are you a team member?
+            </Switch>
+          </div>
         </div>
 
         <div className="flex justify-center">

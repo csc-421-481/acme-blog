@@ -2,7 +2,7 @@
 import { createAccount } from "@/app/api/requests/users";
 import InputField from "@/components/elements/form/InputField";
 import useHandleImageDraft from "@/features/hooks/useHandleImageDraft";
-import { Avatar, Button, Link } from "@nextui-org/react";
+import { Avatar, Button, Link, Switch } from "@nextui-org/react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -189,6 +189,20 @@ const CreateAccountForm = () => {
             placeholder="Describe who you are"
             className="col-span-2"
           />
+          <div className="col-span-2">
+            <Switch
+              {...register("isTeamMember")}
+              className="text-xs text-300"
+              value={watch("isTeamMember")}
+              size="sm"
+              onValueChange={(value) => {
+                console.log(value);
+                setValue("isTeamMember", value);
+              }}
+            >
+              Are you a team member?
+            </Switch>
+          </div>
         </div>
 
         <div className="flex items-center justify-between">
