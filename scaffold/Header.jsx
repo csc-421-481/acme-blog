@@ -121,7 +121,7 @@ const Header = () => {
                 {userData?.id ? (
                   <DropdownMenu aria-label="user panel actions">
                     <DropdownItem key="new" startContent={<User size={15} />}>
-                      Profile
+                      {userData?.firstName} {userData?.lastName}
                     </DropdownItem>
                     <DropdownItem
                       key="copy"
@@ -136,6 +136,7 @@ const Header = () => {
                       startContent={<LogOut size={15} />}
                       onClick={() => {
                         Cookies.remove("userId");
+                        Cookies.remove("token");
                         router.push("/");
                       }}
                     >
