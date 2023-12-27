@@ -41,7 +41,7 @@ const InputField = forwardRef(
               return (
                 <Select {...props} ref={ref}>
                   {options.map((each, index) => (
-                    <SelectItem key={index} value={each.value}>
+                    <SelectItem key={each.value} value={each.value}>
                       {each.label}
                     </SelectItem>
                   ))}

@@ -134,7 +134,7 @@ const Header = () => {
                       startContent={<FilePlus size={15} />}
                       className="text-foreground"
                       as={Link}
-                      href="/profile-create-post"
+                      href="/profile/create-post"
                     >
                       Create Post
                     </DropdownItem>

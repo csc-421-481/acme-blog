@@ -29,12 +29,14 @@ const ProfileDetails = () => {
                 <div className="w-32 h-32 items-center flex justify-center rounded-full border relative">
                   {" "}
                   <Avatar src={userData?.profileImage} className="w-24 h-24" />
-                  <button
-                    className="absolute -bottom-1 right-0 rounded-full p-2 bg-default"
+                  <Button
+                    className="absolute -bottom-1 right-0 rounded-full p-1"
+                    size="sm"
+                    isIconOnly
                     onClick={() => setEditProfileImage(true)}
                   >
                     <Edit size={16} />
-                  </button>
+                  </Button>
                 </div>
               </>
             )}
