@@ -32,8 +32,9 @@ const CreateAccountForm = () => {
         profileImage: profileImage[0],
       });
       console.log(data);
-      Cookies.set("token", data.token);
-      Cookies.set("userId", data.id);
+      Cookies.set("token", data.token, { expires: 30 });
+      Cookies.set("userId", data.id, { expires: 30 });
+
       setKeepLoading(true);
       router.push("/profile");
     } catch (error) {

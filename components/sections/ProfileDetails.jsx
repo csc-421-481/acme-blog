@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Button, Link } from "@nextui-org/react";
+import { Avatar, Button, Link, Skeleton } from "@nextui-org/react";
 import EditProfileForm, {
   EditProfileImage,
 } from "../forms/profile/EditProfileForm";
@@ -39,11 +39,27 @@ const ProfileDetails = () => {
               </>
             )}
             <h1 className="text-2xl font-bold my-2">
-              {userData?.firstName} {userData?.lastName}
+              {!userData ? (
+                <Skeleton className="w-40 h-4 rounded-lg my-2" />
+              ) : (
+                userData?.firstName + " " + userData?.lastName
+              )}
             </h1>
-            <p className="text-sm text-center mt-2 md:4/5 lg:w-3/5">
-              {userData?.bio}
-            </p>
+            {!userData ? (
+              <div className="flex flex-col gap-3 items-center">
+                <Skeleton className="w-20 h-2 rounded-lg" />
+                <Skeleton className="w-16 h-2 rounded-lg" />
+                <Skeleton className="w-9 h-2 rounded-lg" />
+              </div>
+            ) : (
+              <p className="text-sm text-center mt-2 md:4/5 lg:w-3/5">
+                {userData?.bio ? (
+                  userData?.bio
+                ) : (
+                  <p className="text-foreground-500">Bio not set</p>
+                )}
+              </p>
+            )}
           </div>
         </>
       )}

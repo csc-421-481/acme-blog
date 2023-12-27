@@ -53,13 +53,11 @@ const EditProfileForm = ({ handleClose }) => {
     window.scrollTo(0, 0);
   }, []);
   const submitData = async (formData) => {
-    console.log(formData);
     const { ...desiredData } = formData;
     try {
       const { data } = await updateProfile(userData.id, {
         ...desiredData,
       });
-      console.log(data);
       toast.success("Profile updated successfully");
       handleClose();
       mutateUser();

@@ -22,10 +22,10 @@ const LoginForm = () => {
     try {
       const { data } = await login(formData);
       console.log(data);
-      Cookies.set("token", data.token);
-      Cookies.set("userId", data.user);
+      Cookies.set("token", data.token, { expires: 30 });
+      Cookies.set("userId", data.user, { expires: 30 });
       router.push("/profile");
-      // setKeepLoading(true);
+      setKeepLoading(true);
     } catch (error) {
       console.error(error);
       const errorResponse = error?.response?.data;
