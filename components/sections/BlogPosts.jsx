@@ -56,7 +56,7 @@ const BlogPosts = () => {
           )}
         </div>
 
-        {posts.length > 0 && (
+        {posts && posts.length > 0 && (
           <div className="text-center my-6 w-full">
             <Button variant="solid" color="primary" size="lg">
               Read More
