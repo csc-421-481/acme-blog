@@ -39,19 +39,10 @@ const BlogPosts = () => {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts ? (
             posts.length > 0 ? (
-              <>
-                {posts.map((post, index) => (
-                  <BlogPost key={index} post={post} />
-                ))}
-                <div className="text-center my-6 col-span-3">
-                  <Button variant="solid" color="primary" size="lg">
-                    Read More
-                  </Button>
-                </div>
-              </>
+              posts.map((post, index) => <BlogPost key={index} post={post} />)
             ) : (
               <div className="flex flex-col gap-3 items-center col-span-3 text-danger">
                 <XCircle size={100} />
@@ -64,6 +55,14 @@ const BlogPosts = () => {
               .map((each, index) => <BlogPostSkeleton key={index} />)
           )}
         </div>
+
+        {posts.length > 0 && (
+          <div className="text-center my-6 w-full">
+            <Button variant="solid" color="primary" size="lg">
+              Read More
+            </Button>
+          </div>
+        )}
       </section>
     </>
   );

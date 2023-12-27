@@ -10,7 +10,7 @@ const BlogPostSkeleton = () => {
           <div className="flex flex-col gap-3 mt-3">
             <Skeleton className="h-4 w-full rounded-full" />
             <Skeleton className="h-3 w-3/5 rounded-full" />
-            <Skeleton className="h-2 w-2/5 rounded-full" />
+            <Skeleton className="h-3 w-1/3 rounded-full" />
           </div>
         </div>
       </Card>

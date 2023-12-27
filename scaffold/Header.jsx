@@ -50,8 +50,8 @@ const Header = () => {
   const menuItems = [
     { label: "Home", route: "/" },
     { label: "Archive", route: "/archive" },
-    { label: "About Us", route: "/about" },
-    { label: "Contact", route: "/contact" },
+    { label: "Team", route: "/team" },
+    { label: "Authors", route: "/authors" },
   ];
   const handleThemeChange = (value) => {
     if (value) {

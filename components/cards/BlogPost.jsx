@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  Avatar,
   Card,
   CardHeader,
   CardBody,
@@ -38,12 +39,20 @@ const BlogPost = ({ post }) => {
                 <h3>{post?.title}</h3>
               </Link>
             </CardHeader>
-            <CardBody className="mt-2 line-clamp-3 text-sm/relaxed min-h-[150px]">
-              {post.content.slice(0, 200)}....
-            </CardBody>
+            <CardBody
+              className="mt-2 line-clamp-3 text-sm/relaxed min-h-[150px]"
+              dangerouslySetInnerHTML={{
+                __html: post.content.slice(0, 200) + "....",
+              }}
+            ></CardBody>
 
-            <div className="px-3 flex justify-between">
-              <div className="flex gap-3  items-center text-foreground-600 ">
+            <div className="px-3 gap-3 flex justify-between flex-wrap">
+              <div className="flex gap-3  items-center text-foreground-600 items-center ">
+                <Avatar
+                  src={post.user.profileImage}
+                  size={"sm"}
+                  className="w-5 h-5"
+                />
                 <p className="text-xs font-light">
                   {post.user.firstName} {post.user.lastName}
                 </p>
