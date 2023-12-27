@@ -22,10 +22,9 @@ const BlogPost = ({ post }) => {
                   post.coverImage ??
                   "https://res.cloudinary.com/djgtp2qti/image/upload/v1/csc-421-blog/posts/cover-images/WhatsApp_Image_2023-10-24_at_12.26.08_869c2cc5_po8g5e"
                 }
-                className=" object-cover transform hover:scale-110 transition duration-100"
-                fill
-                // width={800}
-                // height={800}
+                className=" object-cover transform hover:scale-110 transition duration-100 w-full h-full"
+                width={300}
+                height={200}
               />
             </Link>
           </div>
