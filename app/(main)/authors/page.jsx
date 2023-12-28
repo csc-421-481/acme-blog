@@ -1,4 +1,4 @@
-import TeamMember from '@/components/cards/TeamMember'
+import Author from "@/components/cards/Author";
 
 const page = () => {
   return (
@@ -10,19 +10,19 @@ const page = () => {
 
       {/* Start Team Members */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 my-5">
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
-        <TeamMember />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
+        <Author />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
