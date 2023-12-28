@@ -19,7 +19,7 @@ const Author = ({ author }) => {
               <h3 className="font-semibold text-custom-xl text-dark mb-1">
                 {author.firstName} {author.lastName}
               </h3>
-              <p className="text-sm">VUG/CSC/20/3957</p>
+              <p className="text-sm">{author.matricNumber}</p>
               <span className="flex items-center gap-2 text-sm mt-2.5 text-foreground-500">
                 <FileText size={15} />6 Published posts
               </span>
