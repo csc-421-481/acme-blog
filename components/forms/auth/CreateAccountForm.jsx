@@ -81,7 +81,7 @@ const CreateAccountForm = () => {
                   onChange: (e) =>
                     handleImageDraft(e.target.files, setprofileImagePreviewUrl),
                 })}
-                accept=".png, .svg, .jpg"
+                accept=".png, .jpg"
               />
               <Avatar src={profileImagePreviewUrl} className="w-20 h-20" />
             </label>
