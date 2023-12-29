@@ -15,13 +15,16 @@ const AltBlogPost = ({ post }) => {
   return (
     post && (
       <>
-        <Card className="flex flex-row transition hover:shadow-xl flex-1 h-[150px]">
+        <Card className="flex flex-col sm:flex-row transition hover:shadow-xl flex-1 h-auto">
           <Link
             href={`posts/${post.id}`}
-            className="w-1/2 md:w-2/5 overflow-hidden p-0 group rounded-none"
+            className="sm:w-1/2 md:w-2/5 overflow-hidden p-0 group rounded-none h-[150px]"
           >
             <Image
-              src={post.coverImage}
+              src={
+                post.coverImage ??
+                "https://res.cloudinary.com/djgtp2qti/image/upload/v1/csc-421-blog/posts/cover-images/WhatsApp_Image_2023-10-24_at_12.26.08_869c2cc5_po8g5e"
+              }
               alt="article image"
               width={200}
               height={200}
@@ -29,8 +32,8 @@ const AltBlogPost = ({ post }) => {
             />
           </Link>
 
-          <CardBody className="flex flex-col gap-1 w-1/2  lg:w-3/5 px-4">
-            <Chip color={post.category.color} variant="flat">
+          <CardBody className="flex flex-col gap-1 sm:w-1/2 md:w-3/5 px-4">
+            <Chip color={post.category.color} variant="flat" size="sm">
               {post.category.name}
             </Chip>
             <CardHeader className="px-0">
@@ -44,7 +47,7 @@ const AltBlogPost = ({ post }) => {
               <p className="">
                 {post.user.firstName} {post.user.lastName}
               </p>
-              <Divider orientation="vertical" />
+              <Divider orientation="vertical" className="h-4" />
               <time dateTime="2022-10-10" className="text-start">
                 {" "}
                 {moment(post.createdAt).format("DD MMMM, YYYY")}{" "}

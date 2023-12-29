@@ -4,11 +4,11 @@ import AltBlogPost from "../cards/AltBlogPost";
 
 const TopBlogPosts = () => {
   const { posts } = useGetBlogPosts();
-  if (posts?.length >= 2) {
-    return (
+  return (
+    posts?.length >= 2 && (
       <>
         <section className="my-8">
-          <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col lg:flex-row gap-6">
             {posts &&
               posts
                 .slice(0, 2)
@@ -16,7 +16,7 @@ const TopBlogPosts = () => {
           </div>
         </section>
       </>
-    );
-  }
+    )
+  );
 };
 export default TopBlogPosts;
