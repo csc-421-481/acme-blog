@@ -129,10 +129,10 @@ const CreateBlogPostForm = () => {
               accept=".svg, .png, .jpg"
               {...register("coverImage", {
                 required: "CoverImage is required",
+                onChange: (e) => {
+                  handleImageDraft(e.target.files, setCoverImageUrl);
+                },
               })}
-              onChange={(e) => {
-                handleImageDraft(e.target.files, setCoverImageUrl);
-              }}
             />
           </label>
 
