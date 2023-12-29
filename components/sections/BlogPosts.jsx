@@ -1,23 +1,26 @@
 "use client";
-import { Button, Chip } from "@nextui-org/react";
+import { Link, Button, Chip } from "@nextui-org/react";
 import useGetCategories from "@/features/hooks/swr-requests/useGetCategories";
 import BlogPost from "../cards/BlogPost";
 import useGetBlogPosts from "@/features/hooks/swr-requests/useGetBlogPosts";
 import BlogPostSkeleton from "../skeletons/BlogPostSkeleton";
 import { XCircle } from "react-feather";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const BlogPosts = () => {
   const { categories } = useGetCategories();
   const { posts } = useGetBlogPosts();
+  const pathname = usePathname();
+  const allPosts = pathname == "/" ? posts?.slice(0, 6) : posts;
   const [currentCategory, setCurrentCategory] = useState(0);
-  const [filteredPosts, setFilteredPosts] = useState(posts ?? null);
+  const [filteredPosts, setFilteredPosts] = useState(allPosts ?? null);
   useEffect(() => {
-    setFilteredPosts(posts);
-  }, [posts]);
+    setFilteredPosts(allPosts);
+  }, [allPosts]);
   const handleFiltering = (categoryId) => {
     setCurrentCategory(categoryId);
-    setFilteredPosts(posts.filter((each) => each.category.id == categoryId));
+    setFilteredPosts(allPosts.filter((each) => each.category.id == categoryId));
   };
 
   return (
@@ -26,7 +29,7 @@ const BlogPosts = () => {
         <div className="my-14">
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold">Browse By Category</h2>
-            <p>Select a category to see more related content</p>
+            <p>Filter posts by category</p>
           </div>
           {categories && (
             <div className="flex flex-wrap gap-4 justify-center  mx-auto my-8">
@@ -37,10 +40,10 @@ const BlogPosts = () => {
                 className={`rounded-full `}
                 onClick={() => {
                   setCurrentCategory(0);
-                  setFilteredPosts(posts);
+                  setFilteredPosts(allPosts);
                 }}
               >
-                All ({posts?.length})
+                All ({allPosts?.length})
               </Button>
               {categories?.map((each, index) => (
                 <Button
@@ -52,7 +55,7 @@ const BlogPosts = () => {
                   onClick={() => handleFiltering(each.id)}
                 >
                   {each.name} (
-                  {posts?.filter((post) => post.category.id == each.id)
+                  {allPosts?.filter((post) => post.category.id == each.id)
                     ?.length || 0}
                   )
                 </Button>
@@ -79,9 +82,15 @@ const BlogPosts = () => {
           )}
         </div>
 
-        {posts && filteredPosts?.length > 0 && (
+        {posts && filteredPosts?.length > 0 && pathname == "/" && (
           <div className="text-center my-6 w-full">
-            <Button variant="solid" color="primary" size="lg">
+            <Button
+              variant="solid"
+              color="primary"
+              size="lg"
+              as={Link}
+              href="/archive"
+            >
               View All Posts
             </Button>
           </div>
