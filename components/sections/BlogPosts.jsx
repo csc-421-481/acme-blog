@@ -5,10 +5,21 @@ import BlogPost from "../cards/BlogPost";
 import useGetBlogPosts from "@/features/hooks/swr-requests/useGetBlogPosts";
 import BlogPostSkeleton from "../skeletons/BlogPostSkeleton";
 import { XCircle } from "react-feather";
+import { useEffect, useState } from "react";
 
 const BlogPosts = () => {
   const { categories } = useGetCategories();
   const { posts } = useGetBlogPosts();
+  const [currentCategory, setCurrentCategory] = useState(0);
+  const [filteredPosts, setFilteredPosts] = useState(posts ?? null);
+  useEffect(() => {
+    setFilteredPosts(posts);
+  }, [posts]);
+  const handleFiltering = (categoryId) => {
+    setCurrentCategory(categoryId);
+    setFilteredPosts(posts.filter((each) => each.category.id == categoryId));
+  };
+
   return (
     <>
       <section className="my-8">
@@ -17,32 +28,44 @@ const BlogPosts = () => {
             <h2 className="text-3xl font-bold">Browse By Category</h2>
             <p>Select a category to see more related content</p>
           </div>
-          <div className="flex flex-wrap gap-4 justify-center  mx-auto my-8">
-            <Button
-              color="default"
-              // size="sm"
-              variant="solid"
-              className={`rounded-full `}
-            >
-              All
-            </Button>
-            {categories?.map((each, index) => (
+          {categories && (
+            <div className="flex flex-wrap gap-4 justify-center  mx-auto my-8">
               <Button
-                color={each.color}
-                key={index}
+                color="default"
                 // size="sm"
-                variant="bordered"
+                variant={currentCategory == 0 ? "shadow" : "ghost"}
                 className={`rounded-full `}
+                onClick={() => {
+                  setCurrentCategory(0);
+                  setFilteredPosts(posts);
+                }}
               >
-                {each.name}
+                All ({posts?.length})
               </Button>
-            ))}
-          </div>
+              {categories?.map((each, index) => (
+                <Button
+                  color={each.color}
+                  key={index}
+                  // size="sm"
+                  variant={currentCategory == each.id ? "shadow" : "ghost"}
+                  className={`rounded-full `}
+                  onClick={() => handleFiltering(each.id)}
+                >
+                  {each.name} (
+                  {posts?.filter((post) => post.category.id == each.id)
+                    ?.length || 0}
+                  )
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts ? (
-            posts.length > 0 ? (
-              posts.map((post, index) => <BlogPost key={index} post={post} />)
+            filteredPosts?.length > 0 ? (
+              filteredPosts.map((post, index) => (
+                <BlogPost key={index} post={post} />
+              ))
             ) : (
               <div className="flex flex-col gap-3 items-center col-span-3 text-danger">
                 <XCircle size={100} />
@@ -56,10 +79,10 @@ const BlogPosts = () => {
           )}
         </div>
 
-        {posts && posts.length > 0 && (
+        {posts && filteredPosts?.length > 0 && (
           <div className="text-center my-6 w-full">
             <Button variant="solid" color="primary" size="lg">
-              Read More
+              View All Posts
             </Button>
           </div>
         )}

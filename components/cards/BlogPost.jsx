@@ -1,4 +1,5 @@
 import Image from "next/image";
+import moment from "moment";
 import {
   Avatar,
   Card,
@@ -28,7 +29,7 @@ const BlogPost = ({ post }) => {
               />
             </Link>
           </div>
-          <div className=" p-4 sm:p-6">
+          <div className="p-4">
             <CardHeader className="mt-0.5 text-foreground-500 flex flex-col items-start">
               <Link
                 href={`/posts/${post?.id}`}
@@ -43,10 +44,13 @@ const BlogPost = ({ post }) => {
               dangerouslySetInnerHTML={{
                 __html: post.content.slice(0, 200) + "....",
               }}
-            ></CardBody>
+            />
 
-            <div className="px-3 gap-3 flex justify-between flex-wrap">
-              <div className="flex gap-3  items-center text-foreground-600 items-center ">
+            <div className="px-3 gap-1 sm:gap-2 md:gap-3 flex justify-between flex-wrap md:flex-no-wrap">
+              <Link
+                href={`/authors/${post.user.id}`}
+                className="flex gap-1 sm:gap-2 md:gap-3 items-center text-foreground-600 items-center "
+              >
                 <Avatar
                   src={post.user.profileImage}
                   size={"sm"}
@@ -55,21 +59,23 @@ const BlogPost = ({ post }) => {
                 <p className="text-xs font-light">
                   {post.user.firstName} {post.user.lastName}
                 </p>
-                <Divider className="w-2.5" />
+                <Divider className="h-5" orientation="vertical" />
                 <time dateTime="2022-10-10" className="text-xs text-start">
                   {" "}
-                  10th Oct 2022{" "}
+                  {moment(post.createdAt).format("DD MMMM, YYYY")}{" "}
                 </time>
-              </div>
-              <Chip
-                variant="flat"
-                color={post.category.color}
-                size="sm"
-                className="capitalize"
-              >
-                {post.category.name}
-              </Chip>
+              </Link>
             </div>
+          </div>
+          <div className="flex justify-end px-4 pb-4">
+            <Chip
+              variant="flat"
+              color={post.category.color}
+              size="sm"
+              className="capitalize"
+            >
+              {post.category.name}
+            </Chip>
           </div>
         </Card>
       </>
