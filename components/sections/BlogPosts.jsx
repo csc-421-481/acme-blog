@@ -17,7 +17,7 @@ const BlogPosts = () => {
   const [filteredPosts, setFilteredPosts] = useState(allPosts ?? null);
   useEffect(() => {
     setFilteredPosts(allPosts);
-  }, [allPosts]);
+  }, [posts]);
   const handleFiltering = (categoryId) => {
     setCurrentCategory(categoryId);
     setFilteredPosts(allPosts.filter((each) => each.category.id == categoryId));
