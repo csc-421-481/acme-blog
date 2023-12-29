@@ -4,7 +4,7 @@ import useGetCategories from "@/features/hooks/swr-requests/useGetCategories";
 import BlogPost from "../cards/BlogPost";
 import useGetBlogPosts from "@/features/hooks/swr-requests/useGetBlogPosts";
 import BlogPostSkeleton from "../skeletons/BlogPostSkeleton";
-import { XCircle } from "react-feather";
+import { XCircle, ArrowRight } from "react-feather";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -90,8 +90,9 @@ const BlogPosts = () => {
               size="lg"
               as={Link}
               href="/archive"
+              endContent={<ArrowRight size={20} />}
             >
-              View All Posts
+              View All {posts.length} Posts
             </Button>
           </div>
         )}
