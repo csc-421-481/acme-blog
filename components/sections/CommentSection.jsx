@@ -104,10 +104,10 @@ const CommentSection = () => {
           </div>
         </form>
       ) : (
-        <div className="space-y-6">
-          <p>You have to logged in to leave a comment</p>
-          <Button as={Link} href="/login">
-            Login In
+        <div className="space-y-4 text-center my-6">
+          <p>You have to be logged in to leave a comment</p>
+          <Button as={Link} href="/login" color="primary">
+            Login
           </Button>
         </div>
       )}
