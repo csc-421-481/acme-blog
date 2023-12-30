@@ -13,7 +13,7 @@ const TopAuthors = () => {
         <div className="flex justify-between">
           <h2 className="text-xl font-bold my-6">Top Authors</h2>
           <Link
-            href="#"
+            href="/authors"
             color="foreground"
             underline="hover"
             className="text-sm hover:text-primary"

@@ -47,6 +47,7 @@ const CreateBlogPostForm = () => {
     try {
       const { data } = await createPost({
         ...formData,
+        coverImage: formData.coverImage[0],
         category: Number(formData.category),
         user: userData.id,
       });
@@ -126,13 +127,13 @@ const CreateBlogPostForm = () => {
               type="file"
               className="hidden"
               id="input"
-              accept=".svg, .png, .jpg"
+              accept=".png, .jpg"
               {...register("coverImage", {
                 required: "CoverImage is required",
+                onChange: (e) => {
+                  handleImageDraft(e.target.files, setCoverImageUrl);
+                },
               })}
-              onChange={(e) => {
-                handleImageDraft(e.target.files, setCoverImageUrl);
-              }}
             />
           </label>
 
