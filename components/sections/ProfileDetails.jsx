@@ -47,6 +47,8 @@ const ProfileDetails = () => {
                 userData?.firstName + " " + userData?.lastName
               )}
             </h1>
+            <p className="text-foreground-500">{userData?.matricNumber}</p>
+            <p className="text-foreground-500 text-xs">{userData?.email}</p>
             {!userData ? (
               <div className="flex flex-col gap-3 items-center">
                 <Skeleton className="w-20 h-2 rounded-lg" />
@@ -54,7 +56,7 @@ const ProfileDetails = () => {
                 <Skeleton className="w-9 h-2 rounded-lg" />
               </div>
             ) : (
-              <p className="text-sm text-center mt-2 md:4/5 lg:w-3/5">
+              <p className="text-sm text-center mt-2 md:4/5 lg:w-3/5 ">
                 {userData?.bio ? (
                   userData?.bio
                 ) : (
