@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { Button } from "@nextui-org/button";
-import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
-import BlogPosts from "@/components/sections/BlogPosts";
-import TopBlogPosts from "@/components/sections/TopBlogPosts";
-import TopAuthors from "@/components/sections/TopAuthors";
-import { getCategories } from "../api/requests/posts";
+import Image from 'next/image'
+import { Button } from '@nextui-org/button'
+import { Card, CardHeader, CardBody, Link } from '@nextui-org/react'
+import BlogPosts from '@/components/sections/BlogPosts'
+import TopBlogPosts from '@/components/sections/TopBlogPosts'
+import TopAuthors from '@/components/sections/TopAuthors'
+import { getCategories } from '../api/requests/posts'
 
 export default function Home() {
   return (
@@ -54,5 +54,5 @@ export default function Home() {
       <TopAuthors />
       {/* End Top Authors section */}
     </>
-  );
+  )
 }
