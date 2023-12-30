@@ -6,6 +6,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { useEffect } from "react";
 import "../../public/styles/BlogPostContent.css";
+import CommentSection from "./CommentSection";
 
 const BlogPostDetails = ({ postId }) => {
   const { post, postLoading, postError } = useGetPost(postId);
@@ -80,41 +81,38 @@ const BlogPostDetails = ({ postId }) => {
           }}
         />
 
-        <Link href="/archive" className="block my-8">
+        {/* <Link href="/archive" className="block my-8">
           View all posts
-        </Link>
+        </Link> */}
 
-        <Card className="w-full lg:w-4/5">
-          <div className=" height-auto p-5">
-            <CardBody className="md:flex-row gap-6">
-              <Link href={`/authors/${post?.user?.id}`}>
-                <Avatar src={post?.user?.profileImage} className="w-24 h-24" />
-              </Link>
-              <div className="space-y-4">
-                <div className="space-3">
-                  <h3 className=" text-custom-xl text-dark">
-                    Published By{" "}
-                    <Link
-                      href={`/authors/${post?.user?.id}`}
-                      className="font-semibold"
-                    >
-                      {post?.user?.firstName} {post?.user?.lastName}
-                    </Link>
-                  </h3>
+        <Card className="w-full lg:w-3/5">
+          <CardBody className="md:flex-row gap-6">
+            <Link href={`/authors/${post?.user?.id}`}>
+              <Avatar src={post?.user?.profileImage} className="w-24 h-24" />
+            </Link>
+            <div className="space-y-4">
+              <div className="space-3">
+                <h3 className=" text-custom-xl text-dark">
+                  Published By{" "}
+                  <Link
+                    href={`/authors/${post?.user?.id}`}
+                    className="font-semibold"
+                  >
+                    {post?.user?.firstName} {post?.user?.lastName}
+                  </Link>
+                </h3>
 
-                  <p className="text-foreground-500 text-sm">
-                    {post?.user?.matricNumber}
-                  </p>
-                </div>
-                <p className="text-sm">
-                  {post?.user?.bio || "No bio available"}
+                <p className="text-foreground-500 text-sm">
+                  {post?.user?.matricNumber}
                 </p>
-
-                <Link href={`/authors/${post?.user?.id}`}>View Profile</Link>
               </div>
-            </CardBody>
-          </div>
+              <p className="text-sm">{post?.user?.bio || "No bio available"}</p>
+
+              <Link href={`/authors/${post?.user?.id}`}>View Profile</Link>
+            </div>
+          </CardBody>
         </Card>
+        <CommentSection postId={postId} />
       </div>
     </>
   );

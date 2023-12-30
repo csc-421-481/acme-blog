@@ -17,8 +17,8 @@ export const createPost = (data) =>
   });
 
 // comments
-export const createComment = (postId, data) =>
-  axiosInstance.psot(`/posts/comments/create/${postId}`, data);
+export const createComment = (data) =>
+  axiosInstance.post(`/posts/comments/create`, data);
 
 export const getComments = (postId) =>
   axiosInstance.get(`/posts/comments/${postId}`);
