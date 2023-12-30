@@ -38,7 +38,7 @@ const EditProfileForm = ({ handleClose }) => {
 
   useEffect(() => {
     reset({ ...defaultValues });
-  }, [userData, reset]);
+  }, [userData, reset, defaultValues]);
 
   // useEffect(() => {
   //   const subscribe = watch((value) => {

@@ -6,13 +6,11 @@ import BlogPost from "../cards/BlogPost";
 import BlogPostSkeleton from "../skeletons/BlogPostSkeleton";
 import { XCircle } from "react-feather";
 
-const UserPosts = () => {
-  const { profilePosts, profilePostsLoading } = useGetProfilePosts(
-    Cookies.get("userId")
-  );
+const UserPosts = ({ userId = Cookies.get("userId") }) => {
+  const { profilePosts, profilePostsLoading } = useGetProfilePosts(userId);
 
   return (
-    <>
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
       {!profilePostsLoading ? (
         profilePosts.length > 0 ? (
           profilePosts.map((each, index) => (
@@ -29,7 +27,7 @@ const UserPosts = () => {
           .fill(true)
           .map((each, index) => <BlogPostSkeleton key={index} />)
       )}
-    </>
+    </div>
   );
 };
 export default UserPosts;

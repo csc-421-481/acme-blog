@@ -28,7 +28,9 @@ const BlogPosts = () => {
       <section className="my-8">
         <div className="my-14">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold">Browse By Category</h2>
+            {pathname == "/" && (
+              <h2 className="text-xl font-bold">Browse By Category</h2>
+            )}
             <p>Filter posts by category</p>
           </div>
           {categories && (

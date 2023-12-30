@@ -6,7 +6,7 @@ const Author = ({ author }) => {
   return (
     author && (
       <>
-        <Link href={`/authors/author?id=${author.id}`}>
+        <Link href={`/authors/${author.id}`}>
           <Card className="bg-gray p-5 group-hover:drop-shadow-1 group-hover:-translate-y-2 transition-all">
             <div className="flex flex-wrap items-center gap-8">
               <div className="w-24 h-24 rounded-full overflow-hidden">
