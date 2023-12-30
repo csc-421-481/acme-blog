@@ -52,6 +52,7 @@ const Header = () => {
     { label: "Archive", route: "/archive" },
     { label: "Team", route: "/team" },
     { label: "Authors", route: "/authors" },
+    { label: "Blog post", route: "/blogPost" },
   ];
   const handleThemeChange = (value) => {
     if (value) {
