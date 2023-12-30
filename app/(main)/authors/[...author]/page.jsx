@@ -23,10 +23,6 @@ const page = () => {
     isLoading: authorDataLoading,
   } = useSWR('api/users/author', fetcher)
 
-  const mutateUserData = () => {
-    mutate('api/users/author')
-  }
-
   const { profilePosts, profilePostsLoading } = useGetProfilePosts(id)
 
   return (
