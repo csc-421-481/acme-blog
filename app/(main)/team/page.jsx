@@ -11,7 +11,7 @@ const page = () => {
     <div>
       <div className="text-center my-10">
         <h1 className="text-3xl font-bold">Team page</h1>
-        <p className="text-sm mt-1 ">10 members</p>
+        <p className="text-sm mt-1 ">{userData?.length} members</p>
       </div>
 
       {/* Start Team Members */}
