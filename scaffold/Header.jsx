@@ -52,7 +52,6 @@ const Header = () => {
     { label: "Archive", route: "/archive" },
     { label: "Team", route: "/team" },
     { label: "Authors", route: "/authors" },
-    { label: "Blog post", route: "/blogPost" },
   ];
   const handleThemeChange = (value) => {
     if (value) {
@@ -79,7 +78,7 @@ const Header = () => {
           />
           <NavbarBrand className="">
             <Link href="/" color="foreground">
-              <p className="font-bold text-inherit text-red-500">LOGO</p>
+              <p className="font-bold text-inherit">LOGO</p>
             </Link>
           </NavbarBrand>
         </NavbarContent>
