@@ -34,6 +34,8 @@ const AuthorProfile = ({ authorId }) => {
             authorData?.firstName + " " + authorData?.lastName
           )}
         </h1>
+        <p className="text-foreground-500">{authorData?.matricNumber}</p>
+        <p className="text-foreground-500 text-xs">{authorData?.email}</p>
         {!authorData ? (
           <div className="flex flex-col gap-3 items-center">
             <Skeleton className="w-20 h-2 rounded-lg" />
