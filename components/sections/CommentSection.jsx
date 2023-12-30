@@ -35,7 +35,9 @@ const CommentSection = () => {
   };
   return (
     <>
-      <h3 className="text-2xl font-bold text-center mt-8">Comments(10)</h3>
+      <h3 className="text-2xl font-bold text-center mt-8">
+        Comments({comments?.length})
+      </h3>
       <Card className="my-8 w-full max-h-[300px] p-0 bg-background mx-auto lg:w-3/5 overflow-y-auto ">
         <div className="p-6 flex flex-col gap-6">
           {comments?.length > 0 ? (
