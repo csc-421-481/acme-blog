@@ -1,30 +1,28 @@
 "use client";
-import { Button, Avatar, Card, CardBody, Link } from "@nextui-org/react";
-import { toast } from "react-toastify";
-import Cookies from "js-cookie";
-import InputField from "../elements/form/InputField";
-import { useForm } from "react-hook-form";
-import useGetComments from "@/features/hooks/swr-requests/useGetComments";
-import { XCircle } from "react-feather";
 import { createComment } from "@/app/api/requests/posts";
+import useGetComments from "@/features/hooks/swr-requests/useGetComments";
+import { Avatar, Button, Card, CardBody, Link } from "@nextui-org/react";
+import Cookies from "js-cookie";
 import moment from "moment";
-import { useParams } from "next/navigation";
+import { XCircle } from "react-feather";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import InputField from "../elements/form/InputField";
 
-const CommentSection = () => {
-  const params = useParams();
-
+const CommentSection = ({ postId }) => {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm();
-  const { comments, mutateComments } = useGetComments(params.postId);
+  const { comments, mutateComments } = useGetComments(postId);
   const submitComment = async (formData) => {
     try {
       const res = await createComment({
         ...formData,
-        post: params.postId,
+        post: postId,
         user: Cookies.get("userId"),
       });
       reset();
@@ -35,15 +33,15 @@ const CommentSection = () => {
   };
   return (
     <>
-      <h3 className="text-2xl font-bold text-center mt-8">
+      <h3 className="text-2xl font-bold text-center mt-[7rem]">
         Comments({comments?.length})
       </h3>
-      <Card className="my-8 w-full max-h-[300px] p-0 bg-background mx-auto lg:w-3/5 overflow-y-auto ">
-        <div className="p-6 flex flex-col gap-6">
+      <Card className="my-8 w-full max-h-[300px] p-0 bg-background mx-auto lg:w-3/5 overflow-y-auto border-1 border-foreground-500">
+        <div className="p-2 md:p-6 flex flex-col gap-6">
           {comments?.length > 0 ? (
             comments?.map((comment, index) => (
               <Card className="w-full" key={index}>
-                <CardBody className="md:flex-row gap-6">
+                <CardBody className="flex-row gap-3 md:gap-6">
                   <Link href={`/authors/${comment?.user?.id}`}>
                     <Avatar src={comment?.user?.profileImage} size="lg" />
                   </Link>
@@ -56,11 +54,13 @@ const CommentSection = () => {
                         {comment?.user?.firstName} {comment?.user?.lastName}
                       </Link>
 
-                      <p className="text-foreground-500 text-sm">
+                      <p className="text-foreground-500 text-xs">
                         {comment?.user?.matricNumber}
                       </p>
                       <p className="text-foreground-500 text-xs">
-                        {moment(comment?.createdAt).format("DD MMMM, YYYY")}
+                        {moment(comment?.createdAt).format(
+                          "DD MMMM, YYYY [at] h:mm A"
+                        )}
                       </p>
                     </div>
                     <p className="text-sm">{comment?.content}</p>
@@ -78,7 +78,7 @@ const CommentSection = () => {
       </Card>
       {Cookies.get("userId") ? (
         <form
-          className="my-8 lg:w-3/5 block mx-auto space-y-4"
+          className="my-8 w-full lg:w-3/5 xl:w-2/5 block mx-auto space-y-4"
           onSubmit={handleSubmit(submitComment)}
         >
           <p className="text-foreground-500">Leave a comment </p>
@@ -89,7 +89,7 @@ const CommentSection = () => {
               isRequired
               {...register("content", { required: "Please provide a comment" })}
               errorMessage={errors.content?.message}
-              isInvalid={!!errors.content}
+              isInvalid={!!errors.content?.message}
               fullWidth
               size="lg"
             />
@@ -106,7 +106,11 @@ const CommentSection = () => {
       ) : (
         <div className="space-y-4 text-center my-6">
           <p>You have to be logged in to leave a comment</p>
-          <Button as={Link} href="/login" color="primary">
+          <Button
+            as={Link}
+            href={`/login?callback=/archive/${postId}`}
+            color="primary"
+          >
             Login
           </Button>
         </div>

@@ -41,7 +41,7 @@ const BlogPostDetails = ({ postId }) => {
                 <div className="w-14 h-14 rounded-full overflow-hidden">
                   <Link href={`/authors/${post?.user?.id}`}>
                     <Avatar
-                      src={post?.user?.profileImage}
+                      src={post?.user.profileImage || ""}
                       className="w-full h-full "
                     />
                   </Link>
@@ -85,7 +85,7 @@ const BlogPostDetails = ({ postId }) => {
           View all posts
         </Link> */}
 
-        <Card className="w-full lg:w-3/5">
+        <Card className="w-full lg:w-3/5 mt-12">
           <CardBody className="md:flex-row gap-6">
             <Link href={`/authors/${post?.user?.id}`}>
               <Avatar src={post?.user?.profileImage} className="w-24 h-24" />

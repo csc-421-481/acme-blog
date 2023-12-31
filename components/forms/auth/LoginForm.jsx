@@ -7,9 +7,11 @@ import { Button, Input, Link } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
   const [keepLoading, setKeepLoading] = useState(false);
+  const searchParams = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -24,7 +26,9 @@ const LoginForm = () => {
       console.log(data);
       Cookies.set("token", data.token, { expires: 30 });
       Cookies.set("userId", data.user, { expires: 30 });
-      router.push("/profile");
+
+      router.push(searchParams.get("callback") ?? "/profile");
+
       setKeepLoading(true);
     } catch (error) {
       console.error(error);
@@ -75,7 +79,10 @@ const LoginForm = () => {
         <div className="flex items-center justify-between">
           <p className="text-sm text-gray-500">
             No account?
-            <Link className="ml-2" href="/create-account">
+            <Link
+              className="ml-2"
+              href={`/create-account?callback=${searchParams.get("callback")}`}
+            >
               Create Account
             </Link>
           </p>

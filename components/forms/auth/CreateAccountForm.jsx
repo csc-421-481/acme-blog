@@ -4,7 +4,7 @@ import InputField from "@/components/elements/form/InputField";
 import useHandleImageDraft from "@/features/hooks/useHandleImageDraft";
 import { Avatar, Button, Link, Switch } from "@nextui-org/react";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 const CreateAccountForm = () => {
   const [profileImagePreviewUrl, setprofileImagePreviewUrl] = useState("");
   const [keepLoading, setKeepLoading] = useState(false);
+  const searchParams = useSearchParams();
   const handleImageDraft = useHandleImageDraft();
   const {
     register,
@@ -36,7 +37,7 @@ const CreateAccountForm = () => {
       Cookies.set("userId", data.id, { expires: 30 });
 
       setKeepLoading(true);
-      router.push("/profile");
+      router.push(searchParams.get("callback") ?? "/profile");
     } catch (error) {
       console.error(error);
       const errorResponse = error?.response?.data;

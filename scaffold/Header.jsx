@@ -146,7 +146,9 @@ const Header = () => {
                       onClick={() => {
                         Cookies.remove("userId");
                         Cookies.remove("token");
-                        window.location.href = "/"; // needed in order to refresh the page
+                        window.location.href = pathname.includes("/profile")
+                          ? "/"
+                          : pathname; // needed in order to refresh the page
                       }}
                     >
                       Log Out
