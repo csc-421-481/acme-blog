@@ -78,7 +78,7 @@ const Header = () => {
           />
           <NavbarBrand className="">
             <Link href="/" color="foreground">
-              <p className="font-bold text-inherit">LOGO</p>
+              <p className="font-bold text-inherit font-logo">ACME BLOG</p>
             </Link>
           </NavbarBrand>
         </NavbarContent>
