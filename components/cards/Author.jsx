@@ -25,7 +25,7 @@ const Author = ({ author }) => {
                   <FileText size={15} />
                   {author.posts_count > 0
                     ? author.posts_count +
-                      ` Published post${author.posts_count > 1 && "s"}`
+                      ` Published post${author.posts_count > 1 ? "s" : ""}`
                     : "No posts yet"}
                 </span>
               </div>
