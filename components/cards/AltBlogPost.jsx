@@ -17,7 +17,7 @@ const AltBlogPost = ({ post }) => {
       <>
         <Card className="flex flex-col sm:flex-row transition hover:shadow-xl flex-1 h-auto">
           <Link
-            href={`posts/${post.id}`}
+            href={`/archive/${post.id}`}
             className="sm:w-1/2 md:w-2/5 overflow-hidden p-0 group rounded-none h-[150px]"
           >
             <Image
@@ -37,10 +37,12 @@ const AltBlogPost = ({ post }) => {
               {post.category.name}
             </Chip>
             <CardHeader className="px-0">
-              <h3 className="font-bold uppercase text-md">{post.title}</h3>
+              <Link href={`/archive/${post.id}`} className="text-foreground">
+                <h3 className="font-bold uppercase text-md">{post.title}</h3>
+              </Link>
             </CardHeader>
             <Link
-              href={`/post/${post.user.id}`}
+              href={`/authors/${post.user.id}`}
               className="flex gap-3 items-center text-foreground-900 text-xs"
             >
               <Avatar src={post.user.profileImage} className="w-5 h-5" />
