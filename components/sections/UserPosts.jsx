@@ -11,8 +11,8 @@ const UserPosts = ({ userId = Cookies.get("userId") }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      {!profilePostsLoading ? (
-        profilePosts.length > 0 ? (
+      {!profilePostsLoading && profilePosts ? (
+        profilePosts?.length > 0 ? (
           profilePosts.map((each, index) => (
             <BlogPost key={index} post={each} />
           ))
