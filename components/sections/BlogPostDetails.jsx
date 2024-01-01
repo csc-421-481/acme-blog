@@ -36,11 +36,9 @@ const BlogPostDetails = ({ postId }) => {
           <div className=" rounded-lg mb-5">
             <div className=" height-auto p-5">
               <div className="flex justify-center items-center gap-4">
-                <div className="w-14 h-14 rounded-full overflow-hidden">
-                  <Link href={`/authors/${post?.user?.id}`}>
-                    <Avatar src={post?.user.profileImage || ""} />
-                  </Link>
-                </div>
+                <Link href={`/authors/${post?.user?.id}`}>
+                  <Avatar src={post?.user.profileImage || ""} />
+                </Link>
                 <div className="text-foreground-500">
                   <Link
                     href={`/authors/${post?.user?.id}`}
