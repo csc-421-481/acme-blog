@@ -31,19 +31,14 @@ const BlogPostDetails = ({ postId }) => {
           <Chip variant="flat" size="sm" color={post?.category?.color}>
             {post?.category?.name}
           </Chip>
-          <p className="text-5xl font-bold text-center mt-2 text-center">
-            {post?.title}
-          </p>
+          <p className="text-5xl font-bold mt-2 text-center">{post?.title}</p>
 
           <div className=" rounded-lg mb-5">
             <div className=" height-auto p-5">
               <div className="flex justify-center items-center gap-4">
                 <div className="w-14 h-14 rounded-full overflow-hidden">
                   <Link href={`/authors/${post?.user?.id}`}>
-                    <Avatar
-                      src={post?.user.profileImage || ""}
-                      className="w-full h-full "
-                    />
+                    <Avatar src={post?.user.profileImage || ""} />
                   </Link>
                 </div>
                 <div className="text-foreground-500">
