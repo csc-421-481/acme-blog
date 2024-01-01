@@ -5,7 +5,7 @@ import useGetAuthors from "@/features/hooks/swr-requests/useGetAuthors";
 import { XCircle } from "react-feather";
 
 const Authors = () => {
-  const { authors } = useGetAuthors();
+  const { authors, authorsLoading } = useGetAuthors();
 
   return (
     <div>
@@ -15,8 +15,8 @@ const Authors = () => {
       </div>
       {/* Start Team Members */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 my-5">
-        {authors ? (
-          authors.length > 0 ? (
+        {authors && !authorsLoading ? (
+          authors?.length > 0 ? (
             authors
               .slice(0, 1000)
               .map((each, index) => <Author author={each} key={index} />)

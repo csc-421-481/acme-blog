@@ -94,7 +94,7 @@ const BlogPosts = () => {
               href="/archive"
               endContent={<ArrowRight size={20} />}
             >
-              View All {posts.length} Posts
+              View All {posts?.length} Posts
             </Button>
           </div>
         )}
