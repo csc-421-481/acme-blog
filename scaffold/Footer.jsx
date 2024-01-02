@@ -9,21 +9,29 @@ const Footer = () => {
           <div className="flex justify-center ">
             <h2 className="text-2xl font-bold font-logo">ACME BLOG</h2>
           </div>
-          <p className="mx-auto text-center leading-relaxed text-sm">
+          <p className="mx-auto max-w-md text-center leading-relaxed text-sm">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
             consequuntur amet culpa cum itaque neque.
           </p>
           <ul className=" flex flex-wrap justify-center gap-6 ">
             <li>
-              <Link color="foreground" className="hover:text-primary" href="/">
+              <Link
+                color="foreground"
+                className="hover:text-primary"
+                href="/team"
+              >
                 {" "}
-                About{" "}
+                Team{" "}
               </Link>
             </li>
             <li>
-              <Link color="foreground" className="hover:text-primary" href="/">
+              <Link
+                color="foreground"
+                className="hover:text-primary"
+                href="/authors"
+              >
                 {" "}
-                Projects{" "}
+                Authors{" "}
               </Link>
             </li>
           </ul>
