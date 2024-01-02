@@ -74,7 +74,7 @@ const Header = () => {
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className={isSmallScreen && "hidden"}
+            className={"sm:hidden"}
           />
           <NavbarBrand className="">
             <Link href="/" color="foreground">
@@ -83,10 +83,7 @@ const Header = () => {
           </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent
-          className={`hidden ${isSmallScreen && "flex"}`}
-          justify="center"
-        >
+        <NavbarContent className={`hidden sm:flex`} justify="center">
           {menuItems.map((each, index) => (
             <NavbarItem key={index}>
               <Link
@@ -99,7 +96,7 @@ const Header = () => {
           ))}
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem className={`hidden ${isSmallScreen && "flex"}`}>
+          <NavbarItem className={`hidden sm:flex`}>
             <Switch
               color="success"
               isSelected={theme == "dark"}
