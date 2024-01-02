@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="flex justify-center ">
             <h2 className="text-2xl font-bold font-logo">ACME BLOG</h2>
           </div>
-          <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-sm">
+          <p className="mx-auto text-center leading-relaxed text-sm">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
             consequuntur amet culpa cum itaque neque.
           </p>
