@@ -17,7 +17,7 @@ const TextEditor = ({ value, onChange }) => {
           plugins: "code link image",
 
           toolbar:
-            "undo redo | formatselect | bold italic underline strikethrough | numlist bullist | link image alignleft aligncenter alignright |code ",
+            "undo redo | blocks | formatselect | bold italic underline strikethrough | numlist bullist | link image alignleft aligncenter alignright |code ",
           mergetags_list: [
             { value: "First.Name", title: "First Name" },
             { value: "Email", title: "Email" },
